@@ -19,10 +19,10 @@ def update_animation(frame):
         # Generate the path from 1 frame ago
         prevPath = pg.generate_path(start, goal, static_obstacles, dynamic_obstacles, frame - 1)
 
-        # White-out the previous path for clearer illustration of the updated path
+        # Grey-out the previous path for clearer illustration of the updated path
         x = [i[0] for i in prevPath[:frame + 1]]
         y = [i[1] for i in prevPath[:frame + 1]]
-        axes.plot(x, y, color='white')
+        axes.plot(x, y, color='lightgrey', linewidth=2)
 
     # Generate new path
     newPath = pg.generate_path(start, goal, static_obstacles, dynamic_obstacles, frame)
@@ -50,8 +50,15 @@ goal = (8, 6)
 
 # Define the static obstacles as a list of polygons
 static_obstacles = [
-    [(2, 2), (2, 8), (3, 8), (3, 3), (8, 3), (8, 2)],
-    [(6, 6), (7, 6), (7, 7), (6, 7)]
+    # Static Demo Maze
+    # [(4, 12), (4, -1), (9, -1), (9, 0), (5, 0), (5, 12)],
+    # [(7, 1.5), (12, 1.5), (12, 13), (11, 13), (11, 2), (7, 2)],
+    # [(5, 3.5), (8, 3.5), (8.5, 4), (5.5, 4)]
+
+    # Dynamic Demo Obstacles
+    [(2, 2), (3, 8), (3, 8), (3, 3), (9, 3), (8, 2)],
+    [(5, -3), (6, -1), (6, 2), (5, 2)],
+    [(5, 6), (7, 6), (7, 7), (6, 7)]
 ]
 
 # Define the dynamic obstacles as a list of points
@@ -63,7 +70,7 @@ dynamic_obstacles = [
     {'initial_position': [
         (5, 5)], "velocity": [random.uniform(-1, 1) * .2, random.uniform(-1, 1) * .2]},
     {'initial_position': [
-        (0, 2.5)], "velocity": [random.uniform(-1, 1) * .1, random.uniform(-1, 1) * .1]}
+        (5, 2.5)], "velocity": [random.uniform(-1, 1) * .1, random.uniform(-1, 1) * .1]}
 ]
 
 # Create the figure and axes
@@ -79,6 +86,7 @@ dynamic_obstacles_location = []
 # Plot the obstacles
 for i, obstacle in enumerate(dynamic_obstacles):
     point, = axes.plot([], [], 'ok', ms=20)
+    point.set_zorder(3)
     dynamic_obstacles_location.append(point)
 
 for i, obstacle in enumerate(static_obstacles):

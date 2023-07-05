@@ -4,6 +4,7 @@ import math
 def point_to_point_distance(p1, p2):
     x1, y1 = p1
     x2, y2 = p2
+    # return abs(x2 - x1) + abs(y2 - y1)
     return math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
 
 
@@ -15,12 +16,30 @@ def neighbors(point):
             (x + 1, y - 1), (x + 1, y), (x + 1, y + 1)]
 
 
-# Check if a point is inside a polygon
+def point_on_polygon_edge(point, polygon):
+    for i in range(len(polygon)):
+        p1 = polygon[i]
+        p2 = polygon[(i + 1) % len(polygon)]
+        v1 = (p2[0] - p1[0], p2[1] - p1[1])
+        v2 = (point[0] - p1[0], point[1] - p1[1])
+        # Cross product of an edge vector and a vector from a vertex to the point
+        cross_product = v1[0] * v2[1] - v1[1] * v2[0]
+        if cross_product == 0 and \
+           (p1[0] <= point[0] <= p2[0] or p2[0] <= point[0] <= p1[0]) and \
+           (p1[1] <= point[1] <= p2[1] or p2[1] <= point[1] <= p1[1]):
+            return True
+    return False
+
 def point_in_polygon(point, polygon):
+    # Checks if a point lies on the edge of a polygon
+    if point_on_polygon_edge(point, polygon):
+        return True
+    # Ray-Casting Algorithm
     x, y = point
     n = len(polygon)
     inside = False
     p1x, p1y = polygon[0]
+    x_inters = float('inf')
     for i in range(n + 1):
         p2x, p2y = polygon[i % n]
         if y > min(p1y, p2y):
@@ -28,7 +47,7 @@ def point_in_polygon(point, polygon):
                 if x <= max(p1x, p2x):
                     if p1y != p2y:
                         x_inters = (y - p1y) * (p2x - p1x) / (p2y - p1y) + p1x
-                    if p1x == p2x or x <= x_inters:
+                    if p1y == p2y or x <= x_inters:
                         inside = not inside
         p1x, p1y = p2x, p2y
     return inside
@@ -73,7 +92,6 @@ def is_static_obstacle(point, static_obstacles):
     for obstacle in static_obstacles:
         if point_in_polygon(point, obstacle):
             return True
-
     return False
 
 
