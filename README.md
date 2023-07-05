@@ -3,13 +3,15 @@ This dynamic pathfinder algorithm finds and plots the shortest path in the prese
 
 ## Visual Demo:
 * Static Obstacles:
-![](https://github.com/ColinZ22/Dynamic-Pathfinder/blob/main/Demos/Static_Demo.gif)
+
+<img src="https://github.com/ColinZ22/Dynamic-Pathfinder/blob/main/Demos/Static_Demo.gif" height="250" width="250">
 
 * Dynamic Obstacles:
-![](https://github.com/ColinZ22/Dynamic-Pathfinder/blob/main/Demos/Dynamic_Demo_1.gif)
-![](https://github.com/ColinZ22/Dynamic-Pathfinder/blob/main/Demos/Dynamic_Demo_2.gif)
-![](https://github.com/ColinZ22/Dynamic-Pathfinder/blob/main/Demos/Dynamic_Demo_3.gif)
-![](https://github.com/ColinZ22/Dynamic-Pathfinder/blob/main/Demos/Dynamic_Demo_4.gif)
+
+<img src="https://github.com/ColinZ22/Dynamic-Pathfinder/blob/main/Demos/Dynamic_Demo_1" height="250" width="250">
+<img src="https://github.com/ColinZ22/Dynamic-Pathfinder/blob/main/Demos/Dynamic_Demo_2" height="250" width="250">
+<img src="https://github.com/ColinZ22/Dynamic-Pathfinder/blob/main/Demos/Dynamic_Demo_3" height="250" width="250">
+<img src="https://github.com/ColinZ22/Dynamic-Pathfinder/blob/main/Demos/Dynamic_Demo_4" height="250" width="250">
 
 ## Algorithm Details
 The algorithm models the environment as a graph and attempts to find the shortest path between the start and end points by exploring neighbors of points in the direction of least “cost.” 

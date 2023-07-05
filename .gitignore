@@ -1,2 +1,3 @@
 venv/
 pycache/
+__pycache__/path_generation.cpython-311.pyc
